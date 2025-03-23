@@ -14,6 +14,13 @@ import {
   Legend 
 } from 'recharts';
 
+// Define proper type for the CustomTooltip props to fix the TypeScript error
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: any[];
+  label?: string;
+}
+
 const PerformanceChart = () => {
   const data = [
     { month: 'Jan', Mathematics: 75, Physics: 68, Literature: 82, ComputerScience: 85 },
@@ -24,8 +31,8 @@ const PerformanceChart = () => {
     { month: 'Jun', Mathematics: 89, Physics: 85, Literature: 86, ComputerScience: 94 },
   ];
 
-  // Custom tooltip
-  const CustomTooltip = ({ active, payload, label }) => {
+  // Custom tooltip with proper TypeScript typing
+  const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white p-4 border border-gray-200 shadow-md rounded-md">
