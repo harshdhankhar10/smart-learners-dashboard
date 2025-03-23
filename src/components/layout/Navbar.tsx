@@ -22,7 +22,9 @@ import {
   Lightbulb,
   MessagesSquare,
   UserPlus,
-  BarChart
+  BarChart,
+  Bot,
+  Sparkles
 } from 'lucide-react';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -69,6 +71,15 @@ const Navbar = () => {
       children: [
         { name: 'Performance', path: '/performance', icon: <BarChart className="h-4 w-4" /> },
         { name: 'Recommendations', path: '/recommendations', icon: <Lightbulb className="h-4 w-4" /> },
+      ]
+    },
+    { 
+      name: 'AI Tools', 
+      path: '#',
+      icon: <Bot className="h-4 w-4" />,
+      children: [
+        { name: 'AI Tutor', path: '/ai-tutor', icon: <Bot className="h-4 w-4" /> },
+        { name: 'Recommendations', path: '/recommendations', icon: <Sparkles className="h-4 w-4" /> },
       ]
     },
     { 

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Calendar, CreditCard, Wallet, Receipt, ShieldCheck, MessagesSquare, Mail, Phone } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -83,6 +84,20 @@ const PaymentsPage = () => {
     });
   };
 
+  // Get badge variant based on status
+  const getBadgeVariant = (status: string) => {
+    switch(status) {
+      case 'paid':
+        return 'default'; // Instead of 'success'
+      case 'pending':
+        return 'secondary';
+      case 'unpaid':
+        return 'destructive';
+      default:
+        return 'outline';
+    }
+  };
+
   // Payment Details Component
   const PaymentDetails = ({ payment }) => (
     <div className="bg-white p-6 rounded-xl shadow-sm">
@@ -101,7 +116,7 @@ const PaymentsPage = () => {
         <div className="flex items-center gap-2">
           <Receipt className="h-4 w-4 text-primary" />
           <span className="text-sm font-medium">Status:</span>
-          <Badge variant={payment.status === 'paid' ? 'success' : payment.status === 'pending' ? 'secondary' : 'destructive'}>{payment.status}</Badge>
+          <Badge variant={getBadgeVariant(payment.status)}>{payment.status}</Badge>
         </div>
         <div className="flex items-center gap-2">
           <Calendar className="h-4 w-4 text-primary" />
@@ -183,7 +198,7 @@ const PaymentsPage = () => {
                         <TableCell>{formatDate(payment.date)}</TableCell>
                         <TableCell>${payment.amount}</TableCell>
                         <TableCell>
-                          <Badge variant={payment.status === 'paid' ? 'success' : payment.status === 'pending' ? 'secondary' : 'destructive'}>{payment.status}</Badge>
+                          <Badge variant={getBadgeVariant(payment.status)}>{payment.status}</Badge>
                         </TableCell>
                       </TableRow>
                     ))}
