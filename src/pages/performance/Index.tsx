@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -68,24 +67,12 @@ const PerformancePage = () => {
     { subject: 'Research Skills', A: 82, fullMark: 100 },
   ];
   
-  // Custom tooltip for charts
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any[]; label?: string }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-4 border border-gray-200 shadow-md rounded-md">
-          <p className="font-medium mb-2">{label}</p>
-          {payload.map((entry, index) => (
-            <div key={`tooltip-${index}`} className="flex items-center space-x-2 mb-1">
-              <div 
-                className="h-3 w-3 rounded-full" 
-                style={{ backgroundColor: entry.color }}
-              />
-              <p className="text-sm">
-                <span className="font-medium">{entry.name}: </span>
-                <span>{entry.value}{entry.name === 'GPA' ? '' : '%'}</span>
-              </p>
-            </div>
-          ))}
+        <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
+          <p className="font-medium text-sm">{`${label}`}</p>
+          <p className="text-primary text-sm">{`Score: ${payload[0].value}%`}</p>
         </div>
       );
     }

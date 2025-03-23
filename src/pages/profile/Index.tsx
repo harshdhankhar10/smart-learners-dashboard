@@ -1,297 +1,203 @@
-
-import React from 'react';
-import Navbar from '@/components/layout/Navbar';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { 
-  User, Mail, Phone, MapPin, Calendar, GraduationCap, 
-  Shield, Edit, Upload, Award, BookOpen
+  User, 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Calendar, 
+  Award, 
+  Book, 
+  Edit, 
+  Lock, 
+  Bell, 
+  ClipboardList,
+  FileText as FileTextIcon
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { Avatar } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
-  ResponsiveContainer, 
-  AreaChart, 
-  Area, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  PieChart, 
-  Pie, 
-  Cell,
-  Legend 
-} from 'recharts';
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card';
+import { cn } from '@/lib/utils';
 
 const ProfilePage = () => {
-  // Attendance data for chart
-  const attendanceData = [
-    { month: 'Jan', attendance: 92 },
-    { month: 'Feb', attendance: 94 },
-    { month: 'Mar', attendance: 88 },
-    { month: 'Apr', attendance: 95 },
-    { month: 'May', attendance: 97 },
-    { month: 'Jun', attendance: 93 },
-  ];
-
-  // Subject performance data
-  const subjectPerformance = [
-    { name: 'Mathematics', value: 85 },
-    { name: 'Physics', value: 78 },
-    { name: 'Literature', value: 92 },
-    { name: 'Computer Science', value: 95 },
-    { name: 'Chemistry', value: 82 },
-  ];
-
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
-
-  // Academic achievements
-  const achievements = [
-    { title: 'Dean\'s List', date: 'Fall 2023', icon: Award },
-    { title: 'Science Project Winner', date: 'Apr 2023', icon: BookOpen },
-    { title: 'Perfect Attendance', date: 'Spring 2023', icon: Calendar },
-  ];
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      
-      <main className="container mx-auto px-4 pt-24 pb-12">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">My Profile</h1>
-          <p className="text-gray-600 mt-1">View and manage your student profile</p>
-        </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Left side - Profile Info */}
-          <div className="lg:col-span-4 space-y-6">
-            <Card className="overflow-hidden animate-fade-in">
-              <div className="bg-gradient-to-r from-blue-500 to-indigo-600 h-32 relative"></div>
-              <div className="px-6 pb-6 relative">
-                <div className="absolute -top-12 left-6 bg-white rounded-full p-1 shadow-md">
-                  <Avatar className="h-24 w-24">
-                    <User className="h-12 w-12" />
-                  </Avatar>
-                </div>
-                <div className="pt-14">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h2 className="text-2xl font-bold">Alex Johnson</h2>
-                      <p className="text-gray-600">Student ID: STU2023456</p>
-                    </div>
-                    <Button size="sm" variant="outline" className="flex gap-1 items-center">
-                      <Edit className="h-4 w-4" />
-                      Edit
-                    </Button>
-                  </div>
-                  
-                  <div className="mt-4 flex flex-col space-y-2 text-sm">
-                    <div className="flex items-center gap-2">
-                      <Mail className="h-4 w-4 text-gray-500" />
-                      <span>alex.johnson@example.edu</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Phone className="h-4 w-4 text-gray-500" />
-                      <span>+1 (555) 123-4567</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-gray-500" />
-                      <span>New York, USA</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-gray-500" />
-                      <span>Joined: September 2022</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-            
-            <Card className="animate-fade-in delay-100">
-              <CardHeader>
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <GraduationCap className="h-5 w-5" />
-                  Academic Information
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <p className="text-sm font-medium text-gray-500">Current Grade</p>
-                  <p>11th Grade</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-500">Department</p>
-                  <p>Science & Technology</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-500">Class</p>
-                  <p>11-A (2023-2024)</p>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-500">Academic Advisor</p>
-                  <p>Dr. Sarah Collins</p>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="animate-fade-in delay-200">
-              <CardHeader>
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <Shield className="h-5 w-5" />
-                  Account Security
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="font-medium">Password</p>
-                      <p className="text-sm text-gray-500">Last updated 3 months ago</p>
-                    </div>
-                    <Button size="sm" variant="outline">Change</Button>
-                  </div>
-                  <Separator />
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="font-medium">Two-Factor Authentication</p>
-                      <p className="text-sm text-gray-500">Disabled</p>
-                    </div>
-                    <Button size="sm" variant="outline">Enable</Button>
-                  </div>
-                  <Separator />
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="font-medium">Login History</p>
-                      <p className="text-sm text-gray-500">View your recent logins</p>
-                    </div>
-                    <Button size="sm" variant="outline">View</Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          
-          {/* Right side - Performance and Stats */}
-          <div className="lg:col-span-8 space-y-6">
-            <Card className="animate-fade-in">
-              <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                  <span>Attendance Overview</span>
-                  <Button variant="outline" size="sm">View Full Report</Button>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="h-[250px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart
-                      data={attendanceData}
-                      margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                      <XAxis dataKey="month" />
-                      <YAxis domain={[80, 100]} />
-                      <Tooltip />
-                      <Area 
-                        type="monotone" 
-                        dataKey="attendance" 
-                        stroke="#3B82F6" 
-                        fill="#93C5FD" 
-                        fillOpacity={0.3}
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card className="animate-fade-in delay-100">
-                <CardHeader>
-                  <CardTitle className="text-lg">Subject Performance</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="h-[250px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={subjectPerformance}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={60}
-                          outerRadius={80}
-                          fill="#8884d8"
-                          paddingAngle={2}
-                          dataKey="value"
-                          label={({name, percent}) => `${name} ${(percent * 100).toFixed(0)}%`}
-                        >
-                          {subjectPerformance.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                          ))}
-                        </Pie>
-                        <Tooltip />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="animate-fade-in delay-200">
-                <CardHeader>
-                  <CardTitle className="text-lg">Recent Achievements</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {achievements.map((achievement, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <div className="bg-primary/10 p-2 rounded-full">
-                          <achievement.icon className="h-5 w-5 text-primary" />
-                        </div>
-                        <div>
-                          <p className="font-medium">{achievement.title}</p>
-                          <p className="text-sm text-gray-500">{achievement.date}</p>
-                        </div>
-                      </div>
-                    ))}
-                    <Button variant="outline" className="w-full mt-2">View All Achievements</Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-            
-            <Card className="animate-fade-in delay-300">
-              <CardHeader>
-                <CardTitle className="text-lg">Documents & Certificates</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                  {['Student ID', 'Transcript', 'Progress Report', 'Medical Form'].map((doc, index) => (
-                    <div key={index} className="border rounded-lg p-4 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors">
-                      <FileText className="h-10 w-10 text-blue-500 mb-2" />
-                      <p className="font-medium">{doc}</p>
-                      <p className="text-xs text-gray-500 mt-1">Last updated: May 5, 2023</p>
-                    </div>
-                  ))}
-                  <div className="border border-dashed rounded-lg p-4 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer">
-                    <Upload className="h-10 w-10 text-gray-400 mb-2" />
-                    <p className="font-medium text-gray-600">Upload New</p>
-                    <p className="text-xs text-gray-500 mt-1">Add a new document</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </main>
+    <div className="container mx-auto py-10">
+      <h1 className="text-3xl font-semibold mb-6">Your Profile</h1>
+      <ProfileSettings />
     </div>
   );
 };
 
-// Fix component not defined error
-const Avatar = ({ className, children }: { className?: string, children: React.ReactNode }) => (
-  <div className={cn("relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full", className)}>
-    <div className="flex h-full w-full items-center justify-center bg-muted rounded-full">
-      {children}
+// Profile Settings Component
+const ProfileSettings = () => {
+  const [name, setName] = useState('Alex Johnson');
+  const [email, setEmail] = useState('alex.johnson@example.com');
+  const [phone, setPhone] = useState('123-456-7890');
+  const [location, setLocation] = useState('New York, USA');
+  const [dob, setDob] = useState('05/20/1998');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert('Profile updated successfully!');
+  };
+
+  // Account Information Section
+  const AccountInformation = () => (
+    <div className="space-y-4">
+      <h3 className="text-lg font-medium">Account Information</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Name</label>
+          <Input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="mt-1"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Email</label>
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="mt-1"
+            disabled
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Phone</label>
+          <Input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="mt-1"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Location</label>
+          <Input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="mt-1"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
+          <Input
+            type="text"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
+            className="mt-1"
+          />
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+
+  // Security Section
+  const SecuritySection = () => (
+    <div className="space-y-4">
+      <h3 className="text-lg font-medium">Security</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Change Password</label>
+          <Input
+            type="password"
+            placeholder="New Password"
+            className="mt-1"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <Input
+            type="password"
+            placeholder="Confirm New Password"
+            className="mt-1"
+          />
+        </div>
+      </div>
+      <Button className={cn("mt-2")} variant="outline" size="sm">
+        Update Password
+      </Button>
+    </div>
+  );
+
+  // Documents Section
+  const DocumentsSection = () => (
+    <div className="space-y-4">
+      <h3 className="text-lg font-medium">Your Documents</h3>
+      <div className="grid gap-3">
+        {[
+          { name: "Registration Certificate", date: "Oct 12, 2023" },
+          { name: "Last Semester Results", date: "Dec 20, 2023" },
+          { name: "ID Card Request", date: "Jan 05, 2024" }
+        ].map((doc, idx) => (
+          <div key={idx} className="flex items-center justify-between p-3 rounded-lg border bg-background/50">
+            <div className="flex items-center gap-3">
+              <FileTextIcon className="h-5 w-5 text-primary/70" />
+              <div>
+                <p className="font-medium">{doc.name}</p>
+                <p className="text-xs text-muted-foreground">Uploaded: {doc.date}</p>
+              </div>
+            </div>
+            <Button variant="ghost" size="sm">View</Button>
+          </div>
+        ))}
+      </div>
+      <Button className={cn("mt-2")} variant="outline" size="sm">
+        Upload New Document
+      </Button>
+    </div>
+  );
+
+  return (
+    <Card className="bg-white p-8 rounded-xl shadow-md">
+      <div className="flex items-center space-x-6 mb-6">
+        <Avatar className="h-20 w-20">
+          <User className="h-10 w-10" />
+        </Avatar>
+        <div>
+          <h2 className="text-2xl font-semibold">{name}</h2>
+          <p className="text-gray-500">{email}</p>
+        </div>
+      </div>
+
+      <Separator className="my-4" />
+
+      <Tabs defaultValue="account" className="w-full">
+        <TabsList>
+          <TabsTrigger value="account">Account</TabsTrigger>
+          <TabsTrigger value="security">Security</TabsTrigger>
+          <TabsTrigger value="documents">Documents</TabsTrigger>
+        </TabsList>
+        <TabsContent value="account" className="space-y-4">
+          <AccountInformation />
+        </TabsContent>
+        <TabsContent value="security" className="space-y-4">
+          <SecuritySection />
+        </TabsContent>
+        <TabsContent value="documents" className="space-y-4">
+          <DocumentsSection />
+        </TabsContent>
+      </Tabs>
+
+      <Separator className="my-4" />
+
+      <Button onClick={handleSubmit} className="w-full mt-4">
+        Update Profile
+      </Button>
+    </Card>
+  );
+};
 
 export default ProfilePage;
