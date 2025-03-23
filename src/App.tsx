@@ -11,6 +11,10 @@ import MaterialsPage from "./pages/materials/Index";
 import AssignmentsPage from "./pages/assignments/Index";
 import PerformancePage from "./pages/performance/Index";
 import DiscussionsPage from "./pages/discussions/Index";
+import ProfilePage from "./pages/profile/Index";
+import ExamsPage from "./pages/exams/Index";
+import SupportPage from "./pages/support/Index";
+import PaymentsPage from "./pages/payments/Index";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +33,10 @@ const App = () => (
           <Route path="/assignments" element={<AssignmentsPage />} />
           <Route path="/performance" element={<PerformancePage />} />
           <Route path="/discussions" element={<DiscussionsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/exams" element={<ExamsPage />} />
+          <Route path="/support" element={<SupportPage />} />
+          <Route path="/payments" element={<PaymentsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
